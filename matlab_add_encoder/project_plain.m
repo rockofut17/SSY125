@@ -46,7 +46,7 @@ for i = 1:length(EbN0) % use parfor ('help parfor') to parallelize
   [mod_outI_unc,mod_outQ_unc]=qpsk_modulation(tx_bit);
 
 
-  tx_sym = mod_outI + 1i*mod_outQ; 
+  tx_sym_enc = mod_outI + 1i*mod_outQ; 
   tx_sym_unc = mod_outI_unc + 1i*mod_outQ_unc; 
 
   % scatterplot(tx_data);
@@ -55,7 +55,7 @@ for i = 1:length(EbN0) % use parfor ('help parfor') to parallelize
 
   EbN0_value = 10^(EbN0(i)/10);
 
-  R = length(tx_bit)/length(tx_sym);
+  R = length(tx_bit)/length(tx_sym_enc);
 
   SNR = R * EbN0_value; 
 
@@ -68,16 +68,16 @@ for i = 1:length(EbN0) % use parfor ('help parfor') to parallelize
   % [HR] Hard Receiver
   % ...
   
-  rx_de = conv_hard(rx_data);
+  %rx_de = conv_hard(rx_data);
 
   % [SR] Soft Receiver
   % ...
 
   % demodulation
 
-  [demod_outI,demod_outQ]=qpsk_demodulation(rx_de);
+  %[demod_outI,demod_outQ]=qpsk_demodulation(rx_de);
 
-  bit_out = P2SConverter(demod_outI,demod_outQ);
+  %bit_out = P2SConverter(demod_outI,demod_outQ);
 
   [demod_outI_unc,demod_outQ_unc]=qpsk_demodulation(rx_data_unc);
 
@@ -88,7 +88,7 @@ for i = 1:length(EbN0) % use parfor ('help parfor') to parallelize
   % End processing one block of information
   % ===================================================================== %
   
-  BitErrs = length(find(bit_out ~= tx_bit)); % count the bit errors and evaluate the bit error rate
+  BitErrs = length(find(bit_out_unc ~= tx_bit)); % count the bit errors and evaluate the bit error rate
   totErr = totErr + BitErrs;
   num = num + N; 
 
