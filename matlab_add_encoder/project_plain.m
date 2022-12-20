@@ -59,7 +59,7 @@ for i = 1:length(EbN0) % use parfor ('help parfor') to parallelize
 
   SNR = R * EbN0_value; 
 
-  rx_data = awgn(tx_sym,SNR,'measured');
+  rx_data = awgn(tx_sym_unc,SNR,'measured');
 
   rx_data_unc = awgn(tx_sym_unc,SNR,'measured');
   

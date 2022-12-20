@@ -1,0 +1,7 @@
+function AMPM(data_in)
+kmod1=1/sqrt(2);
+const=[(1-1i)*,(-3+3i)*kmod3,(1+3i)*kmod2,(-3-1i)*kmod2,(3-3i)*kmod3,(-1+1i)*kmod1,(3+1i)*kmod2,(-1-3i)*kmod2];
+bit_trio = int2str(reshape(data_in,3,numel(data_in)/3)');
+constVal = const(bin2dec(bit_trio)+1);
+scatterplot(constVal);
+end
