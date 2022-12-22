@@ -10,7 +10,7 @@ switch type
         G2 = [1 0 1]; 
     case 'eps2'
         G1 = [1 1 1 0 1];
-        G2 = [0 1 1];
+        G2 = [0 1 1 0 1];
     case 'eps3'
         G1 = [1 1 0 0 1];
         G2 = [1 1 0 1 1];
@@ -18,7 +18,7 @@ end
 % Encode the message using the conv function
         encoded_msg1 = mod(conv(msg,G1),2);
         encoded_msg2 = mod(conv(msg,G2),2);
-        full_message = [encoded_msg1(1:end-4) ; encoded_msg2(1:end-4)];
+        full_message = [encoded_msg1(1:end-length(G1)+1) ; encoded_msg2(1:end-length(G2)+1)];
         full_message = reshape(full_message,1,[]);
        
 
